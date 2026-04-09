@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Convertly</title>
+  <meta name="description" content="Privacy policy for Convertly, the on-device image converter. We collect zero data.">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #3478F6;
+      --bg: #F8F9FA;
+      --bg-white: #FFFFFF;
+      --text-primary: #1A1A2E;
+      --text-secondary: #5A5A72;
+      --text-tertiary: #8E8E9A;
+      --border: #E2E4E8;
+      --accent-green: #34A853;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .nav-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .nav-brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+    }
+
+    .nav-brand span {
+      font-size: 1.125rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    nav a.back-link {
+      font-size: 0.9375rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    nav a.back-link:hover {
+      opacity: 0.75;
+    }
+
+    /* ── Content ── */
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .content h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .meta {
+      font-size: 0.9375rem;
+      color: var(--text-tertiary);
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meta strong {
+      color: var(--text-secondary);
+    }
+
+    .content h2 {
+      font-size: 1.375rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .content p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .content ul {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    .content li {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .content a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .content a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Highlight Box ── */
+    .highlight-box {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent-green);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .highlight-box p {
+      font-size: 1rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+
+    .highlight-box p + p {
+      margin-top: 8px;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    /* ── Zero Data Table ── */
+    .zero-table {
+      width: 100%;
+      margin: 24px 0;
+      border-collapse: collapse;
+    }
+
+    .zero-table th,
+    .zero-table td {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 0.9375rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .zero-table th {
+      background: var(--bg);
+      color: var(--text-tertiary);
+      font-weight: 600;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .zero-table td {
+      color: var(--text-secondary);
+    }
+
+    .zero-table .status {
+      font-weight: 600;
+      color: var(--accent-green);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+    }
+
+    footer .footer-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer .copy {
+      font-size: 0.875rem;
+      color: var(--text-tertiary);
+    }
+
+    footer a {
+      font-size: 0.875rem;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--primary);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .content {
+        padding: 32px 20px 64px;
+      }
+
+      .content h1 {
+        font-size: 1.75rem;
+      }
+
+      .content h2 {
+        font-size: 1.1875rem;
+      }
+
+      .zero-table th,
+      .zero-table td {
+        padding: 10px 12px;
+        font-size: 0.875rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="../assets/convertly-icon.png" alt="Convertly" width="32" height="32">
+        <span>Convertly</span>
+      </a>
+      <a href="index.html" class="back-link">&larr; Back to home</a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <main class="content">
+    <h1>Privacy Policy</h1>
+    <p class="meta">
+      <strong>Developer:</strong> Team Banh Mi &nbsp;&middot;&nbsp;
+      <strong>Effective:</strong> April 1, 2026 &nbsp;&middot;&nbsp;
+      <strong>Last updated:</strong> April 9, 2026
+    </p>
+
+    <div class="highlight-box">
+      <p>Convertly does not collect, store, transmit, or share any of your data. Period.</p>
+      <p>All image processing happens entirely on your device using native system APIs. We operate no servers and have no way to access your files.</p>
+    </div>
+
+    <h2>The Short Version</h2>
+    <p>Convertly is an image conversion utility that runs 100% on your device. We built it to be completely private by design, not just by policy. There is no server component, no analytics, no tracking, and no data collection of any kind.</p>
+
+    <h2>Data We Collect</h2>
+    <table class="zero-table">
+      <thead>
+        <tr>
+          <th>Data Type</th>
+          <th>Collected?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Personal information (name, email, etc.)</td><td class="status">No</td></tr>
+        <tr><td>Photos or images you convert</td><td class="status">No</td></tr>
+        <tr><td>Usage analytics or telemetry</td><td class="status">No</td></tr>
+        <tr><td>Device identifiers or fingerprints</td><td class="status">No</td></tr>
+        <tr><td>Location data</td><td class="status">No</td></tr>
+        <tr><td>Crash reports</td><td class="status">No</td></tr>
+        <tr><td>Advertising identifiers</td><td class="status">No</td></tr>
+        <tr><td>Cookies or web tracking</td><td class="status">No</td></tr>
+      </tbody>
+    </table>
+
+    <h2>On-Device Processing</h2>
+    <p>When you select an image to convert, Convertly processes it entirely on your device using native platform APIs. Your original files and converted outputs remain in your device's local storage or photo library. At no point are files uploaded to a remote server.</p>
+
+    <h2>No Third-Party SDKs</h2>
+    <p>Convertly does not integrate any third-party SDKs, frameworks, or services that collect user data. This includes but is not limited to:</p>
+    <ul>
+      <li>No analytics services (Google Analytics, Firebase, Mixpanel, etc.)</li>
+      <li>No advertising networks</li>
+      <li>No crash reporting tools (Sentry, Crashlytics, etc.)</li>
+      <li>No social media SDKs</li>
+      <li>No attribution or tracking frameworks</li>
+    </ul>
+
+    <h2>No Account Required</h2>
+    <p>Convertly does not require you to create an account, sign in, or provide any personal information. You download the app and use it immediately.</p>
+
+    <h2>No Network Requests</h2>
+    <p>Convertly does not make network requests during normal operation. The app functions fully offline. The only network activity that may occur is through Apple's standard App Store mechanisms for app updates, which are managed by iOS and not by Convertly.</p>
+
+    <h2>Photo Library Access</h2>
+    <p>Convertly requests access to your photo library so you can select images to convert and save converted results. This access is managed entirely by iOS through the system photo picker. Convertly only accesses images you explicitly select, and only for the purpose of conversion. Images are never transmitted off your device.</p>
+
+    <h2>Children's Privacy</h2>
+    <p>Convertly does not collect data from any user, regardless of age. Because we collect no personal information whatsoever, there are no special provisions necessary for children's data.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>If we ever change this policy, we will update this page with a new effective date. Given our zero-data-collection architecture, meaningful changes are unlikely. If we ever introduce features that involve network communication, we will update this policy in advance and clearly describe what data is involved.</p>
+
+    <h2>Your Rights</h2>
+    <p>Under GDPR, CCPA, and other privacy regulations, you have the right to access, correct, delete, and port your data. Because Convertly collects no data, there is nothing to access, correct, delete, or port. You are in complete control of your files at all times.</p>
+
+    <h2>Contact</h2>
+    <p>If you have questions or concerns about this privacy policy, contact us at:</p>
+    <p><a href="mailto:admin@quietmuse.org">admin@quietmuse.org</a></p>
+    <p><strong>Team Banh Mi</strong></p>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <span class="copy">&copy; 2026 Team Banh Mi. All rights reserved.</span>
+      <a href="index.html">Home</a>
+    </div>
+  </footer>
+
+</body>
+</html>
