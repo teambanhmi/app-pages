@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convertly — Fast, Private Image Conversion</title>
+  <meta name="description" content="Convert JPG, PNG, WEBP, and PDF images instantly on your device. No uploads, no subscriptions, no compromises.">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #3478F6;
+      --primary-dark: #2560D4;
+      --accent: #FF9500;
+      --accent-dark: #E08600;
+      --bg: #F8F9FA;
+      --bg-white: #FFFFFF;
+      --text-primary: #1A1A2E;
+      --text-secondary: #5A5A72;
+      --text-tertiary: #8E8E9A;
+      --border: #E2E4E8;
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .nav-brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+
+    .nav-brand span {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 80px 0 64px;
+      text-align: center;
+    }
+
+    .hero-icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 28px;
+      box-shadow: 0 8px 32px rgba(52, 120, 246, 0.18), 0 2px 8px rgba(0, 0, 0, 0.06);
+      margin-bottom: 32px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, #6C5CE7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .tagline {
+      font-size: 1.375rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.5;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .app-store-badge {
+      height: 54px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .app-store-badge:hover {
+      transform: scale(1.04);
+      opacity: 0.9;
+    }
+
+    .hero-note {
+      margin-top: 16px;
+      font-size: 0.875rem;
+      color: var(--text-tertiary);
+    }
+
+    /* ── Format Strip ── */
+    .formats {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 64px;
+    }
+
+    .format-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.01em;
+    }
+
+    .format-chip .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .format-chip .dot.jpg  { background: #FF6B6B; }
+    .format-chip .dot.png  { background: #51CF66; }
+    .format-chip .dot.webp { background: #845EF7; }
+    .format-chip .dot.pdf  { background: #FF9500; }
+    .format-chip .dot.heic { background: #3478F6; }
+
+    /* ── Features Grid ── */
+    .features {
+      padding: 64px 0;
+    }
+
+    .features h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card p {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .icon-convert   { background: rgba(52, 120, 246, 0.1);  }
+    .icon-privacy   { background: rgba(81, 207, 102, 0.1);  }
+    .icon-batch     { background: rgba(255, 149, 0, 0.1);   }
+    .icon-free      { background: rgba(132, 94, 247, 0.1);  }
+    .icon-quality   { background: rgba(255, 107, 107, 0.1); }
+    .icon-speed     { background: rgba(52, 199, 220, 0.1);  }
+
+    /* ── Privacy Banner ── */
+    .privacy-banner {
+      margin: 32px 0 64px;
+      background: linear-gradient(135deg, #1A1A2E 0%, #2D2D48 100%);
+      border-radius: var(--radius-lg);
+      padding: 48px 32px;
+      text-align: center;
+      color: #FFFFFF;
+    }
+
+    .privacy-banner .shield {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .privacy-banner h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .privacy-banner p {
+      font-size: 1.0625rem;
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 540px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+
+    .privacy-banner a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: opacity 0.2s;
+    }
+
+    .privacy-banner a:hover {
+      opacity: 0.85;
+      text-decoration: underline;
+    }
+
+    /* ── Bottom CTA ── */
+    .bottom-cta {
+      text-align: center;
+      padding: 32px 0 80px;
+    }
+
+    .bottom-cta h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .bottom-cta p {
+      color: var(--text-secondary);
+      font-size: 1.0625rem;
+      margin-bottom: 32px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+    }
+
+    footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer .copy {
+      font-size: 0.875rem;
+      color: var(--text-tertiary);
+    }
+
+    footer .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    footer .footer-links a {
+      font-size: 0.875rem;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .hero {
+        padding: 48px 0 40px;
+      }
+
+      .hero h1 {
+        font-size: 2.25rem;
+      }
+
+      .hero .tagline {
+        font-size: 1.125rem;
+      }
+
+      .hero-icon {
+        width: 96px;
+        height: 96px;
+        border-radius: 22px;
+        margin-bottom: 24px;
+      }
+
+      .features h2,
+      .bottom-cta h2 {
+        font-size: 1.5rem;
+      }
+
+      .privacy-banner {
+        padding: 32px 20px;
+        border-radius: var(--radius-md);
+      }
+
+      .privacy-banner h2 {
+        font-size: 1.375rem;
+      }
+
+      .nav-links {
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav-links span.hide-mobile {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-brand">
+        <img src="../assets/convertly-icon.png" alt="Convertly app icon" width="36" height="36">
+        <span>Convertly</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features"><span class="hide-mobile">Features</span></a>
+        <a href="#privacy"><span class="hide-mobile">Privacy</span></a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <img src="../assets/convertly-icon.png" alt="Convertly" class="hero-icon" width="120" height="120">
+      <h1>Convertly</h1>
+      <p class="tagline">Fast, private image conversion. Convert any image format instantly, entirely on your device.</p>
+
+      <div class="formats">
+        <span class="format-chip"><span class="dot jpg"></span>JPG</span>
+        <span class="format-chip"><span class="dot png"></span>PNG</span>
+        <span class="format-chip"><span class="dot webp"></span>WEBP</span>
+        <span class="format-chip"><span class="dot pdf"></span>PDF</span>
+        <span class="format-chip"><span class="dot heic"></span>HEIC</span>
+      </div>
+
+      <div class="hero-cta">
+        <a href="https://apps.apple.com/app/convertly" target="_blank" rel="noopener noreferrer">
+          <img
+            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+            alt="Download on the App Store"
+            class="app-store-badge"
+            height="54"
+          >
+        </a>
+      </div>
+      <p class="hero-note">Free. No account required. No subscriptions.</p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2>Everything you need, nothing you don't</h2>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon icon-convert">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4" stroke="#3478F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Multi-Format Conversion</h3>
+          <p>Seamlessly convert between JPG, PNG, WEBP, PDF, and HEIC. Every common format, handled.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-privacy">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M12 2l7 4v5c0 5.25-3.5 9.74-7 11-3.5-1.26-7-5.75-7-11V6l7-4z" stroke="#51CF66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>100% On-Device</h3>
+          <p>Your files never leave your phone. All processing happens locally using native APIs. Zero server uploads.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-batch">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="#FF9500" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="#FF9500" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="#FF9500" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="#FF9500" stroke-width="2"/></svg>
+          </div>
+          <h3>Batch Convert</h3>
+          <p>Select dozens of images and convert them all at once. Save time with one-tap bulk operations.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-free">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0v20M2 12h20" stroke="#845EF7" stroke-width="2"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10M12 2a15 15 0 00-4 10 15 15 0 004 10" stroke="#845EF7" stroke-width="2"/></svg>
+          </div>
+          <h3>Free, No Subscriptions</h3>
+          <p>No paywalls, no weekly subscriptions, no hidden charges. The full app is free to use, forever.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-quality">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M12 3l2.09 6.26L21 9.27l-5 3.89L17.18 21 12 17.27 6.82 21 8 13.16l-5-3.89 6.91-.01L12 3z" stroke="#FF6B6B" stroke-width="2" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Quality Control</h3>
+          <p>Adjust compression and quality settings before converting. Keep file sizes small or quality pristine.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-speed">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#34C7DC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Instant Results</h3>
+          <p>Conversions complete in under a second. No waiting, no progress bars, no cloud round-trips.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy Banner -->
+  <section id="privacy">
+    <div class="container">
+      <div class="privacy-banner">
+        <span class="shield" aria-hidden="true">&#x1F6E1;&#xFE0F;</span>
+        <h2>Your files never leave this device</h2>
+        <p>Convertly processes every image using on-device APIs. We don't operate servers, we don't collect data, and we don't include third-party analytics. Your photos are your business.</p>
+        <a href="privacy.html">Read our privacy policy &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bottom-cta">
+    <div class="container">
+      <h2>Ready to convert?</h2>
+      <p>Download Convertly and start converting images in seconds.</p>
+      <a href="https://apps.apple.com/app/convertly" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+          alt="Download on the App Store"
+          class="app-store-badge"
+          height="54"
+        >
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <span class="copy">&copy; 2026 Team Banh Mi. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="mailto:admin@quietmuse.org">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
