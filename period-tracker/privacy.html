@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luna — Privacy Policy</title>
+  <meta name="description" content="Luna period tracker privacy policy. Your data never leaves your device. No servers, no accounts, no tracking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --plum:       #3D1F5B;
+      --plum-dark:  #251040;
+      --plum-mid:   #5A2D82;
+      --plum-light: #7B4AAD;
+      --plum-glow:  #9B6BC5;
+      --cream:      #F5EDD8;
+      --cream-dim:  #D8C9A8;
+      --cream-muted:#A8967A;
+      --rose:       #E8B4C8;
+      --rose-soft:  #C98FAB;
+      --bg:         #1A0D2E;
+      --surface:    rgba(61,31,91,0.35);
+      --border:     rgba(245,237,216,0.12);
+      --border-soft:rgba(245,237,216,0.06);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .bg-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 70% 50% at 15% 10%, rgba(90,45,130,0.3) 0%, transparent 55%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, var(--plum-dark) 0%, var(--bg) 70%);
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      padding: 28px 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    nav a {
+      color: var(--cream-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 300;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--cream); }
+    nav a .arrow { font-style: normal; }
+
+    /* ---- HEADER ---- */
+    .page-header {
+      text-align: center;
+      padding: 20px 24px 60px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .page-header .icon {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .page-header .sub {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--rose);
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    .page-header .effective-date {
+      font-size: 0.85rem;
+      color: var(--cream-muted);
+      font-weight: 300;
+    }
+
+    /* ---- HIGHLIGHT BOX ---- */
+    .highlight-box {
+      max-width: 680px;
+      margin: 0 auto 60px;
+      padding: 0 24px;
+    }
+
+    .highlight-inner {
+      background: linear-gradient(135deg, rgba(61,31,91,0.5) 0%, rgba(37,16,64,0.5) 100%);
+      border: 1px solid rgba(245,237,216,0.15);
+      border-radius: 20px;
+      padding: 36px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight-inner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245,237,216,0.25), transparent);
+    }
+
+    .highlight-inner p {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.55;
+    }
+
+    .highlight-inner p strong {
+      font-style: normal;
+      color: var(--rose);
+      font-weight: 400;
+    }
+
+    /* ---- CONTENT ---- */
+    .content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .section {
+      margin-bottom: 52px;
+    }
+
+    .section h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .section p {
+      font-size: 1rem;
+      color: var(--cream-dim);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .section ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-soft);
+      font-size: 1rem;
+      color: var(--cream-dim);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .section ul li:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .section ul li .bullet {
+      color: var(--rose-soft);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .section ul li strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    .callout {
+      background: rgba(61,31,91,0.3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--rose-soft);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin: 24px 0;
+      font-size: 0.975rem;
+      color: var(--cream-dim);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .callout strong { color: var(--cream); font-weight: 500; }
+
+    /* ---- FOOTER ---- */
+    footer {
+      text-align: center;
+      padding: 40px 24px 56px;
+      border-top: 1px solid var(--border-soft);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: var(--cream-muted);
+      font-weight: 300;
+      line-height: 2;
+    }
+
+    footer a {
+      color: var(--cream-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--cream); }
+
+    footer .separator { margin: 0 8px; opacity: 0.4; }
+
+    @media (max-width: 560px) {
+      nav { padding: 20px 24px; }
+      .highlight-inner { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+
+<nav>
+  <a href="index.html"><span class="arrow">&#8592;</span> Back to Luna</a>
+</nav>
+
+<header class="page-header">
+  <span class="icon">&#127769;</span>
+  <h1>Privacy Policy</h1>
+  <p class="sub">Luna — Cycle &amp; Period Tracker</p>
+  <p class="effective-date">Effective date: April 2026</p>
+</header>
+
+<div class="highlight-box">
+  <div class="highlight-inner">
+    <p>
+      Luna collects nothing. Your cycle data
+      <strong>never leaves your device</strong> —
+      no servers, no cloud, no accounts, no exceptions.
+    </p>
+  </div>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <h2>What data Luna stores</h2>
+    <p>Luna stores the following data <strong>locally on your iPhone only</strong> using Apple's standard on-device storage (AsyncStorage). This data is never transmitted anywhere:</p>
+    <ul>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span><strong>Cycle dates</strong> — period start and end dates, flow intensity (light, medium, heavy)</span>
+      </li>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span><strong>Symptoms</strong> — physical symptoms you choose to log (e.g. cramps, headache, bloating)</span>
+      </li>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span><strong>Mood</strong> — your daily mood rating (1–5 scale)</span>
+      </li>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span><strong>Energy</strong> — your daily energy level (low, medium, high)</span>
+      </li>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span><strong>Notes</strong> — free-form text notes you write for any given day</span>
+      </li>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span><strong>App settings</strong> — your cycle length, period length, and goal preference</span>
+      </li>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span><strong>Onboarding status</strong> — whether you've completed the first-launch flow</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>What Luna does NOT collect</h2>
+    <ul>
+      <li>
+        <span class="bullet">&#10005;</span>
+        <span>No personal information — no name, email, phone number, or any identifier</span>
+      </li>
+      <li>
+        <span class="bullet">&#10005;</span>
+        <span>No analytics or usage data — we don't track screens visited, features used, or time spent</span>
+      </li>
+      <li>
+        <span class="bullet">&#10005;</span>
+        <span>No crash reporting — no third-party crash reporting SDK is included in the app</span>
+      </li>
+      <li>
+        <span class="bullet">&#10005;</span>
+        <span>No advertising identifiers — no IDFA or any advertising framework</span>
+      </li>
+      <li>
+        <span class="bullet">&#10005;</span>
+        <span>No location data — Luna never requests location access</span>
+      </li>
+      <li>
+        <span class="bullet">&#10005;</span>
+        <span>No health kit access — Luna does not read from or write to Apple Health</span>
+      </li>
+      <li>
+        <span class="bullet">&#10005;</span>
+        <span>No camera or microphone access — not requested, not used</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>How your data is stored</h2>
+    <p>All data is stored on your device using React Native AsyncStorage, which writes to your iPhone's standard app sandboxed storage. This data:</p>
+    <ul>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span>Stays on your device and is <strong>not synced to iCloud</strong></span>
+      </li>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span>Is not accessible to other apps on your device</span>
+      </li>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span>Is <strong>not transmitted</strong> over the internet at any time</span>
+      </li>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span>Is protected by your iPhone's built-in security and encryption</span>
+      </li>
+    </ul>
+    <div class="callout">
+      <strong>About fonts:</strong> Luna uses fonts bundled directly in the app binary. No external font services (like Google Fonts) are loaded at runtime. The app functions completely offline.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>No third-party SDKs</h2>
+    <p>Luna does not include any third-party SDKs that could collect or transmit data, including but not limited to:</p>
+    <ul>
+      <li><span class="bullet">&#10005;</span><span>No Firebase or Google Analytics</span></li>
+      <li><span class="bullet">&#10005;</span><span>No Facebook SDK or Meta Pixel</span></li>
+      <li><span class="bullet">&#10005;</span><span>No Sentry, Bugsnag, or any crash reporter</span></li>
+      <li><span class="bullet">&#10005;</span><span>No AppsFlyer, Adjust, or attribution SDK</span></li>
+      <li><span class="bullet">&#10005;</span><span>No Mixpanel, Amplitude, or product analytics</span></li>
+    </ul>
+    <p style="margin-top:20px;">Luna uses only standard Expo and React Native libraries for rendering the UI. These libraries run entirely on-device and do not make network requests.</p>
+  </section>
+
+  <section class="section">
+    <h2>Deleting your data</h2>
+    <p>You have full control over your data at all times:</p>
+    <ul>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span><strong>In-app deletion:</strong> Go to Settings &rarr; "Delete All Data" to permanently erase all stored entries, settings, and onboarding state</span>
+      </li>
+      <li>
+        <span class="bullet">&#9679;</span>
+        <span><strong>Uninstall:</strong> Deleting the Luna app from your iPhone removes all associated data</span>
+      </li>
+    </ul>
+    <p>Because no data is stored on any server, there is no account to request deletion of and no need to contact us to remove your data.</p>
+  </section>
+
+  <section class="section">
+    <h2>Children's privacy</h2>
+    <p>Luna is intended for users aged 12 and older. We do not knowingly collect any information from anyone — the app stores data only on the user's device and transmits nothing. There are no accounts, no registration, and no user-identifiable information at any point.</p>
+  </section>
+
+  <section class="section">
+    <h2>Changes to this policy</h2>
+    <p>If we ever change how Luna handles data — which would require a significant departure from our privacy-first design philosophy — we will update this policy and post a clear notice within the app. The effective date at the top of this page reflects when it was last updated.</p>
+    <p>Given that Luna stores nothing externally, any change significant enough to affect your privacy would also require your active consent within the app before taking effect.</p>
+  </section>
+
+  <section class="section">
+    <h2>Contact</h2>
+    <p>Questions about this privacy policy or Luna's data practices? Email us at:</p>
+    <p>
+      <a href="mailto:admin@quietmuse.org" style="color:var(--rose-soft); text-decoration:none; font-weight:500; font-size:1.05rem;">
+        admin@quietmuse.org
+      </a>
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <p>
+    <a href="index.html">Luna</a>
+    <span class="separator">&middot;</span>
+    Built by <a href="https://github.com/teambanhmi">Team Banh Mi</a>
+    <span class="separator">&middot;</span>
+    <a href="mailto:admin@quietmuse.org">admin@quietmuse.org</a>
+  </p>
+  <p style="margin-top:8px; font-size:0.8rem; opacity:0.5;">
+    &copy; 2026 Team Banh Mi. Luna is not a medical app and does not provide medical advice.
+  </p>
+</footer>
+
+</body>
+</html>
