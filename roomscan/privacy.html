@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SketchPlan — Privacy Policy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --navy:#1B4FD8; --text:#111827; --text2:#6B7280; --border:#E5E7EB; --bg:#F7F8FA; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      background: #1B4FD8;
+      color: white;
+      padding: 40px 24px 32px;
+      text-align: center;
+    }
+    header a {
+      display: inline-block;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    header h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 36px;
+      font-weight: 400;
+    }
+    header p { font-size: 14px; color: rgba(255,255,255,0.65); margin-top: 8px; }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      background: white;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      min-height: 100vh;
+    }
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 36px 0 12px;
+      color: var(--text);
+    }
+    h2:first-child { margin-top: 0; }
+    p { font-size: 15px; line-height: 1.7; color: #374151; margin-bottom: 12px; }
+    ul { margin: 8px 0 12px 20px; }
+    li { font-size: 15px; line-height: 1.7; color: #374151; margin-bottom: 4px; }
+    .highlight {
+      background: #EFF6FF;
+      border-left: 3px solid var(--navy);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+    }
+    .highlight p { color: var(--navy); font-weight: 500; margin: 0; }
+    a { color: var(--navy); }
+    footer-strip {
+      display: block;
+      text-align: center;
+      padding: 24px;
+      font-size: 13px;
+      color: var(--text2);
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← SketchPlan</a>
+  <h1>Privacy Policy</h1>
+  <p>Effective date: April 15, 2026</p>
+</header>
+
+<main>
+
+  <div class="highlight">
+    <p>SketchPlan collects no personal data, requires no account, and never sends your scan data to any server. Everything stays on your device.</p>
+  </div>
+
+  <h2>What Data SketchPlan Collects</h2>
+  <p>SketchPlan stores the following data <strong>locally on your device only</strong>:</p>
+  <ul>
+    <li><strong>Room scan data</strong> — 3D spatial data captured by your iPhone's LiDAR sensor and processed by Apple's RoomPlan framework. Stored as binary files in your app's private Documents folder.</li>
+    <li><strong>Project metadata</strong> — project names, addresses, notes, and room dimensions. Stored in a local SQLite database (SwiftData).</li>
+    <li><strong>Photos</strong> — images you attach to rooms. Stored as JPEG files in your app's private Documents folder. Never uploaded.</li>
+    <li><strong>Settings</strong> — your preference for metric or imperial units. Stored in UserDefaults on your device.</li>
+    <li><strong>Purchase receipt</strong> — if you unlock Pro, Apple's StoreKit stores a purchase verification token locally to confirm your purchase. SketchPlan does not receive or store payment information.</li>
+  </ul>
+
+  <h2>What SketchPlan Does NOT Collect</h2>
+  <ul>
+    <li>No analytics or usage tracking</li>
+    <li>No advertising identifiers</li>
+    <li>No crash reporting (beyond what Apple provides automatically)</li>
+    <li>No location data</li>
+    <li>No contacts or calendar data</li>
+    <li>No email address or account information</li>
+    <li>No scan data is ever transmitted to our servers — we have no servers</li>
+  </ul>
+
+  <h2>Camera and LiDAR Access</h2>
+  <p>SketchPlan requests access to your camera and LiDAR sensor solely to perform room scanning using Apple's RoomPlan framework. The camera feed is processed entirely on-device by Apple's framework. No video or camera images are stored by SketchPlan; only the resulting 3D structural data (room dimensions, wall positions, door and window locations) is saved.</p>
+
+  <h2>Photo Library Access</h2>
+  <p>If you choose to export a floor plan as a PNG image to your photo library, SketchPlan requests write-only access to your Photos app. SketchPlan never reads your existing photos.</p>
+
+  <h2>In-App Purchase</h2>
+  <p>SketchPlan's Pro unlock is a one-time purchase processed entirely by Apple through StoreKit. SketchPlan does not receive your payment information, credit card details, or Apple ID. Purchase verification is handled locally by Apple's framework.</p>
+
+  <h2>Third-Party Services</h2>
+  <p>SketchPlan uses no third-party analytics, advertising, or data-sharing SDKs. The app uses Apple's first-party frameworks only: RoomPlan, ARKit, PDFKit, StoreKit, SwiftData, and PhotosKit.</p>
+
+  <h2>Data Retention and Deletion</h2>
+  <p>All data is stored exclusively on your device. To delete your data:</p>
+  <ul>
+    <li><strong>Individual projects</strong> — swipe left on any project in the Projects list and tap Delete.</li>
+    <li><strong>All data</strong> — delete the SketchPlan app from your device. This permanently removes all scan data, photos, and projects stored by the app.</li>
+  </ul>
+  <p>We have no ability to access or delete your data on your behalf, as it never leaves your device.</p>
+
+  <h2>Children's Privacy</h2>
+  <p>SketchPlan is not directed at children under 13. We do not knowingly collect information from children under 13. As we collect no personal information from anyone, this policy applies equally to all users.</p>
+
+  <h2>Changes to This Policy</h2>
+  <p>If we materially change this privacy policy, we will update the effective date above and, where required, notify users through the App Store update notes.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this privacy policy? Email us at <a href="mailto:admin@quietmuse.org">admin@quietmuse.org</a>.</p>
+
+</main>
+
+<footer-strip>
+  <a href="index.html">SketchPlan</a> &nbsp;·&nbsp;
+  &copy; 2026 Team Banhmi &nbsp;·&nbsp;
+  <a href="mailto:admin@quietmuse.org">admin@quietmuse.org</a>
+</footer-strip>
+
+</body>
+</html>
