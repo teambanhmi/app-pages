@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VialCalc — Peptide Reconstitution Calculator</title>
+  <meta name="description" content="Calculate peptide reconstitution in seconds. Dose, injection volume, and syringe units — with every formula cited. No subscription. No account. $9.99 once.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:           #080F1E;
+      --surface:      #0D1B35;
+      --surface-alt:  #0F2040;
+      --border:       #1A3058;
+      --teal:         #00D4B8;
+      --teal-dim:     #009E88;
+      --teal-glow:    rgba(0,212,184,0.14);
+      --text:         #EDF2FF;
+      --text-sec:     #7A9CC8;
+      --text-muted:   #3D5A85;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', -apple-system, sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── FORMULA WALL (hero background) ────────────────────── */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .formula-wall {
+      position: absolute;
+      inset: -40px;
+      z-index: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      transform: rotate(-8deg) scale(1.2);
+      transform-origin: center center;
+      pointer-events: none;
+      animation: wallDrift 50s ease-in-out infinite alternate;
+    }
+
+    @keyframes wallDrift {
+      0%   { transform: rotate(-8deg) scale(1.2) translateY(0); }
+      100% { transform: rotate(-8deg) scale(1.2) translateY(-50px); }
+    }
+
+    .formula-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .formula-item {
+      padding: 28px 24px;
+      border-bottom: 1px solid rgba(26,48,88,0.4);
+      border-right: 1px solid rgba(26,48,88,0.3);
+    }
+
+    .formula-item .label {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(0,212,184,0.25);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .formula-item .eq {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: rgba(122,156,200,0.14);
+      line-height: 1.5;
+    }
+
+    .formula-item .result {
+      font-size: 0.75rem;
+      color: rgba(0,212,184,0.12);
+      margin-top: 4px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    /* Gradient overlay */
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse at 25% 35%, rgba(0,212,184,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 65%, rgba(0,60,160,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at center 50%, rgba(8,15,30,0.3) 0%, rgba(8,15,30,0.88) 55%, var(--bg) 100%);
+    }
+
+    /* ── HERO CONTENT ───────────────────────────────────────── */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 130px 24px 80px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .hero-icon {
+      width: 112px;
+      height: 112px;
+      border-radius: 26px;
+      margin-bottom: 36px;
+      box-shadow:
+        0 16px 60px rgba(0,212,184,0.18),
+        0  0   0 1px rgba(0,212,184,0.10);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-9px); }
+    }
+
+    .hero-content h1 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(4rem, 10vw, 7rem);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      margin-bottom: 26px;
+    }
+
+    .hero-content h1 .accent { color: var(--teal); }
+
+    .tagline {
+      font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+      color: var(--text-sec);
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      margin-bottom: 50px;
+      line-height: 1.65;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 17px 36px;
+      border-radius: 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .cta-primary {
+      background: var(--teal);
+      color: #040D1A;
+    }
+    .cta-primary:hover {
+      background: #14EDD0;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,212,184,0.28);
+    }
+
+    .cta-secondary {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(12px);
+    }
+    .cta-secondary:hover {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-2px);
+    }
+
+    .cta svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* ── SCREENSHOTS ────────────────────────────────────────── */
+    .screenshots {
+      position: relative;
+      z-index: 2;
+      padding: 10px 24px 100px;
+    }
+
+    .screenshots-inner {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 22px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .screenshot {
+      flex-shrink: 0;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow:
+        0 28px 80px rgba(0,0,0,0.65),
+        0  0   0 1px rgba(255,255,255,0.06);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .screenshot:hover { transform: translateY(-10px) scale(1.02); }
+
+    .screenshot img { width: 100%; height: auto; display: block; }
+
+    .ss-wide  { width: 220px; }
+    .ss-mid   { width: 200px; transform: translateY(-24px); }
+    .ss-mid:hover { transform: translateY(-34px) scale(1.02); }
+    .ss-slim  { width: 180px; }
+
+    /* ── FEATURES ────────────────────────────────────────────── */
+    .features {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .features h2 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(2.4rem, 5vw, 3.2rem);
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 56px;
+      line-height: 1.2;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      padding: 28px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .feature-card:hover {
+      border-color: rgba(0,212,184,0.30);
+      transform: translateY(-2px);
+    }
+
+    .feature-card .icon {
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .feature-card p {
+      font-size: 0.975rem;
+      color: var(--text-sec);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* ── PULL QUOTE ──────────────────────────────────────────── */
+    .pull-quote {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+      position: relative;
+    }
+
+    .pull-quote::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 56px;
+      height: 3px;
+      background: var(--teal);
+      border-radius: 2px;
+    }
+
+    .pull-quote blockquote {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(1.7rem, 3.8vw, 2.3rem);
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--text-sec);
+      margin-bottom: 20px;
+    }
+
+    .pull-quote .attr {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* ── BOTTOM CTA ──────────────────────────────────────────── */
+    .bottom-cta {
+      text-align: center;
+      padding: 40px 24px 60px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .bottom-cta h2 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .bottom-cta p {
+      color: var(--text-sec);
+      font-weight: 300;
+      margin-bottom: 28px;
+      font-size: 1.15rem;
+    }
+
+    .price-tag {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 1.05rem;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    footer p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.9;
+    }
+
+    footer a { color: var(--text-sec); text-decoration: none; }
+    footer a:hover { color: var(--teal); }
+
+    /* ── ANIMATIONS ──────────────────────────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .d1 { animation-delay: 0.10s; }
+    .d2 { animation-delay: 0.20s; }
+    .d3 { animation-delay: 0.33s; }
+    .d4 { animation-delay: 0.48s; }
+    .d5 { animation-delay: 0.15s; }
+    .d6 { animation-delay: 0.28s; }
+    .d7 { animation-delay: 0.40s; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .formula-wall { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .hero-content  { padding: 100px 20px 60px; }
+      .hero-icon     { width: 90px; height: 90px; border-radius: 20px; }
+      .screenshots-inner { gap: 12px; }
+      .ss-wide  { width: 170px; }
+      .ss-mid   { width: 155px; }
+      .ss-slim  { width: 135px; }
+    }
+
+    @media (max-width: 440px) {
+      .ss-wide  { width: 135px; border-radius: 18px; }
+      .ss-mid   { width: 125px; border-radius: 18px; }
+      .ss-slim  { width: 110px; border-radius: 18px; }
+      .cta { padding: 14px 24px; font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO ─────────────────────────────────────────────────── -->
+  <section class="hero-section">
+
+    <div class="formula-wall" aria-hidden="true">
+      <!-- Column 1 -->
+      <div class="formula-col">
+        <div class="formula-item">
+          <div class="label">Step 1</div>
+          <div class="eq">Concentration = Vial Amount ÷ BAC Water</div>
+          <div class="result">2.5 mg/mL</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Step 2</div>
+          <div class="eq">Injection Volume = Dose ÷ Concentration</div>
+          <div class="result">0.10 mL</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Step 3</div>
+          <div class="eq">Syringe Units = Volume × 100</div>
+          <div class="result">10 units</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Preset</div>
+          <div class="eq">BPC-157 · 5 mg vial · 2 mL BAC</div>
+          <div class="result">2,500 mcg/mL</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Preset</div>
+          <div class="eq">Semaglutide · 5 mg · 2 mL</div>
+          <div class="result">2.5 mg/mL</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Conversion</div>
+          <div class="eq">1 mg = 1,000 mcg (SI exact)</div>
+          <div class="result">×1000</div>
+        </div>
+      </div>
+      <!-- Column 2 -->
+      <div class="formula-col">
+        <div class="formula-item">
+          <div class="label">Preset</div>
+          <div class="eq">Tirzepatide · 15 mg · 3 mL</div>
+          <div class="result">5 mg/mL</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Syringe</div>
+          <div class="eq">U-100: 100 units per mL</div>
+          <div class="result">Standard</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Preset</div>
+          <div class="eq">HGH · 10 IU vial · 1 mL BAC</div>
+          <div class="result">10 IU/mL</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Conversion</div>
+          <div class="eq">HGH: 1 mg = 3 IU (WHO standard)</div>
+          <div class="result">×3</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Preset</div>
+          <div class="eq">TB-500 · 5 mg · 2 mL BAC</div>
+          <div class="result">2.5 mg/mL</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Syringe</div>
+          <div class="eq">U-40: 40 units per mL</div>
+          <div class="result">Veterinary</div>
+        </div>
+      </div>
+      <!-- Column 3 -->
+      <div class="formula-col">
+        <div class="formula-item">
+          <div class="label">Step 1</div>
+          <div class="eq">Concentration = Vial Amount ÷ BAC Water</div>
+          <div class="result">5 mg/mL</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Preset</div>
+          <div class="eq">Ipamorelin · 5 mg · 2 mL BAC</div>
+          <div class="result">2,500 mcg/mL</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Step 2</div>
+          <div class="eq">Injection Volume = Dose ÷ Concentration</div>
+          <div class="result">0.05 mL</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Preset</div>
+          <div class="eq">PT-141 · 10 mg · 2 mL BAC</div>
+          <div class="result">5,000 mcg/mL</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Step 3</div>
+          <div class="eq">Syringe Units = Volume × 100</div>
+          <div class="result">5 units</div>
+        </div>
+        <div class="formula-item">
+          <div class="label">Preset</div>
+          <div class="eq">Retatrutide · 10 mg · 2 mL</div>
+          <div class="result">5 mg/mL</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <img class="hero-icon fade-in d1"
+           src="icon.png"
+           alt="VialCalc app icon"
+           width="112" height="112">
+
+      <h1 class="fade-in d2"><span class="accent">Vial</span>Calc</h1>
+
+      <p class="tagline fade-in d3">
+        Peptide reconstitution made precise.<br>
+        Dose · Injection Volume · Syringe Units — every formula cited.
+      </p>
+
+      <div class="cta-row fade-in d4">
+        <a href="#" class="cta cta-primary">
+          <!-- Apple logo -->
+          <svg viewBox="0 0 384 512">
+            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+          </svg>
+          Download on the App Store
+        </a>
+        <a href="privacy.html" class="cta cta-secondary">Privacy Policy</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SCREENSHOTS ───────────────────────────────────────────── -->
+  <section class="screenshots">
+    <div class="screenshots-inner">
+      <div class="screenshot ss-wide fade-in d5">
+        <img src="screenshot-calc.png"
+             alt="VialCalc calculator — enter vial amount, BAC water, and desired dose"
+             loading="lazy">
+      </div>
+      <div class="screenshot ss-mid fade-in d6">
+        <img src="screenshot-results.png"
+             alt="VialCalc results — concentration, injection volume, and syringe units"
+             loading="lazy">
+      </div>
+      <div class="screenshot ss-slim fade-in d7">
+        <img src="screenshot-home.png"
+             alt="VialCalc on the iOS home screen"
+             loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURES ─────────────────────────────────────────────── -->
+  <section class="features">
+    <h2>Everything you need.<br>Nothing you don't.</h2>
+    <div class="feature-grid">
+
+      <div class="feature-card">
+        <span class="icon">&#9881;&#65039;</span>
+        <h3>Instant Reconstitution</h3>
+        <p>Enter vial amount, BAC water, and desired dose. Get concentration, injection volume, and syringe units in under a second.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="icon">&#128203;</span>
+        <h3>Show Math Mode</h3>
+        <p>Expand every calculation step — formula, substituted values, result — with pharmaceutical source citations. Trust your numbers.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="icon">&#128137;</span>
+        <h3>20 Verified Presets</h3>
+        <p>BPC-157, Tirzepatide, Semaglutide, HGH, and 16 more. Pharma-verified concentrations in four categories. One tap to fill.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="icon">&#128274;</span>
+        <h3>100% On-Device</h3>
+        <p>No account. No cloud. No analytics. Your calculation history lives in SwiftData on your phone only — you own it completely.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PULL QUOTE ────────────────────────────────────────────── -->
+  <section class="pull-quote">
+    <blockquote>&ldquo;How much BAC water do I add to this vial?&rdquo;</blockquote>
+    <p class="attr">— Every peptide researcher, every single time</p>
+  </section>
+
+  <!-- ── BOTTOM CTA ────────────────────────────────────────────── -->
+  <section class="bottom-cta">
+    <h2>Calculate with confidence.</h2>
+    <p>One-time purchase. No subscriptions. No accounts.</p>
+    <div class="price-tag">$9.99 &middot; One-time</div>
+    <br><br>
+    <a href="#" class="cta cta-primary">
+      <svg viewBox="0 0 384 512" width="18" height="18">
+        <path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+      </svg>
+      Download on the App Store
+    </a>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────────────── -->
+  <footer>
+    <p>
+      Built by <a href="https://github.com/teambanhmi">Team Banh Mi</a><br>
+      <a href="privacy.html">Privacy Policy</a>
+      &middot;
+      <a href="mailto:admin@quietmuse.org">Support</a>
+      &middot;
+      <a href="https://github.com/teambanhmi/vialcalc">GitHub</a><br>
+      For research and educational purposes only.
+      Always verify with a licensed pharmacist or physician.
+    </p>
+  </footer>
+
+</body>
+</html>
