@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Stillness</title>
+  <meta name="description" content="Stillness privacy policy. No data collection. All data stays on your device.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #0F1923;
+      --surface: #1A2535;
+      --accent:  #C8924A;
+      --text:    #F2EDE4;
+      --muted:   #8A97A8;
+      --dim:     #4A5568;
+      --border:  rgba(255,255,255,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .nav-logo span { color: var(--accent); }
+    nav a { color: var(--muted); text-decoration: none; font-size: 14px; }
+    nav a:hover { color: var(--text); }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .effective {
+      font-size: 13px;
+      color: var(--dim);
+      margin-bottom: 48px;
+    }
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 40px 0 12px;
+    }
+    p { font-size: 15px; color: var(--muted); margin-bottom: 16px; }
+    ul { list-style: none; margin-bottom: 16px; }
+    ul li {
+      font-size: 15px;
+      color: var(--muted);
+      padding: 4px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+    ul li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+    .highlight {
+      background: rgba(200,146,74,0.08);
+      border: 1px solid rgba(200,146,74,0.2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 32px 0;
+    }
+    .highlight p {
+      color: var(--text);
+      margin: 0;
+      font-size: 15px;
+    }
+    footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p, footer a { font-size: 13px; color: var(--dim); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+    @media (max-width: 600px) {
+      main, nav, footer { padding-left: 16px; padding-right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html"><div class="nav-logo">Still<span>ness</span></div></a>
+    <a href="index.html">← Back</a>
+  </nav>
+
+  <main>
+    <h1>Privacy Policy</h1>
+    <p class="effective">Effective date: April 15, 2026</p>
+
+    <div class="highlight">
+      <p><strong>Short version:</strong> Stillness collects nothing. No account, no analytics, no server. Everything you do in the app stays on your device.</p>
+    </div>
+
+    <h2>What data we collect</h2>
+    <p>Stillness collects <strong>no personal data</strong>. Specifically:</p>
+    <ul>
+      <li>We do not collect your name, email, or any identifying information.</li>
+      <li>We do not require an account to use the app.</li>
+      <li>We do not use analytics SDKs (no Firebase, no Mixpanel, no Amplitude).</li>
+      <li>We do not embed advertising networks.</li>
+      <li>We do not track how you use the app.</li>
+    </ul>
+
+    <h2>Data stored on your device</h2>
+    <p>Stillness stores the following data locally using Apple's SwiftData framework:</p>
+    <ul>
+      <li><strong>Session history:</strong> date, duration, session type (timer or breathing), sound chosen, breathing pattern, and breathing rounds completed.</li>
+      <li><strong>Timer preferences:</strong> last-used duration, bell tone, interval setting, and sound selection.</li>
+      <li><strong>App settings:</strong> streak display preference.</li>
+    </ul>
+    <p>This data never leaves your device and is not transmitted anywhere.</p>
+
+    <h2>Apple Health integration</h2>
+    <p>If you grant permission, Stillness writes <em>Mindful Minutes</em> records to Apple Health after each session. This data goes directly from your device to Health — Stillness has no server involvement. You can revoke access at any time in <strong>Settings → Privacy → Health</strong>.</p>
+    <p>Stillness only writes to Health; it never reads your Health data.</p>
+
+    <h2>Third-party services</h2>
+    <p>Stillness uses no third-party services, SDKs, or frameworks that transmit data. The only external communication is:</p>
+    <ul>
+      <li><strong>App Store:</strong> Apple's standard purchase and update delivery infrastructure.</li>
+      <li><strong>Apple Health:</strong> Only if you opt in, as described above.</li>
+    </ul>
+
+    <h2>Data deletion</h2>
+    <p>To delete all session history, go to <strong>Settings → Delete All Sessions</strong> inside the app. To remove all data including preferences, delete the app from your device. Reinstalling starts completely fresh.</p>
+
+    <h2>Children's privacy</h2>
+    <p>Stillness does not knowingly collect any information from children under 13. Since we collect no data at all, this is inherent to our design.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If we ever change this policy in a meaningful way (e.g., if we add analytics), we will update the effective date and release a new app version. Continued use of the updated app constitutes acceptance.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy: <a href="mailto:admin@quietmuse.org" style="color:var(--accent);">admin@quietmuse.org</a></p>
+  </main>
+
+  <footer>
+    <p>© 2026 Stillness · Team Banhmi</p>
+    <a href="index.html">← Back to Stillness</a>
+  </footer>
+
+</body>
+</html>
