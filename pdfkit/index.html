@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Folio — Sign, Fill &amp; Annotate PDFs</title>
+  <meta name="description" content="The PDF app that works, costs once, and never breaks your files. Sign, fill, annotate, merge and scan PDFs. $9.99 one-time. No subscription.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:    #1B3A5C;
+      --navy-d:  #122640;
+      --cobalt:  #2563EB;
+      --cobalt-l:#3B82F6;
+      --gold:    #FBBF24;
+      --bg:      #0F1E30;
+      --surface: #162A40;
+      --border:  #1E3A56;
+      --text:    #F0F6FF;
+      --muted:   #8BA6C0;
+      --dim:     #4A7099;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ──────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(37,99,235,0.22) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(27,58,92,0.5) 0%, transparent 60%);
+      z-index: 0;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 26px;
+      margin-bottom: 40px;
+      box-shadow: 0 16px 60px rgba(37,99,235,0.25), 0 0 0 1px rgba(37,99,235,0.18);
+      animation: float 7s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cobalt-l);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: clamp(3.6rem, 9vw, 6.4rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+
+    h1 em { color: var(--gold); font-style: normal; }
+
+    .tagline {
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 52px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 34px;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.22s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--cobalt);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--cobalt-l);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37,99,235,0.35);
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.09);
+      color: var(--text);
+      border-color: var(--dim);
+    }
+
+    .btn svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+
+    .price-note {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: var(--dim);
+    }
+
+    .price-note strong { color: var(--gold); font-weight: 600; }
+
+    /* ── SCREENSHOTS ────────────────────────────────── */
+    .screenshots {
+      padding: 40px 24px 100px;
+      overflow: hidden;
+    }
+
+    .screenshots-inner {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      align-items: flex-end;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .shot {
+      flex-shrink: 0;
+      width: 220px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.05);
+      transition: transform 0.45s cubic-bezier(.16,1,.3,1);
+    }
+    .shot:hover { transform: translateY(-12px) scale(1.02); }
+    .shot:nth-child(2) { transform: translateY(-32px); }
+    .shot:nth-child(2):hover { transform: translateY(-44px) scale(1.02); }
+    .shot img { width: 100%; height: auto; display: block; }
+
+    /* ── FEATURES ───────────────────────────────────── */
+    .features {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cobalt-l);
+      margin-bottom: 16px;
+    }
+
+    .features h2 {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 60px;
+      line-height: 1.15;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      padding: 30px 26px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition: border-color 0.22s, transform 0.22s;
+    }
+    .feature-card:hover {
+      border-color: var(--cobalt);
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+      display: block;
+      line-height: 1;
+    }
+
+    .feature-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── PULL QUOTE ─────────────────────────────────── */
+    .quote-section {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      text-align: center;
+    }
+
+    .quote-line {
+      width: 56px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: 0 auto 36px;
+    }
+
+    blockquote {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .attr {
+      font-size: 0.9rem;
+      color: var(--dim);
+    }
+
+    /* ── BOTTOM CTA ─────────────────────────────────── */
+    .bottom-cta {
+      text-align: center;
+      padding: 60px 24px 80px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .bottom-cta h2 {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 14px;
+      line-height: 1.15;
+    }
+
+    .bottom-cta p {
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 36px;
+      font-size: 1.1rem;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--dim);
+      line-height: 2;
+    }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--cobalt-l); }
+
+    /* ── FADE-IN ─────────────────────────────────────── */
+    .fade { opacity: 0; transform: translateY(24px); animation: up 0.75s ease forwards; }
+    @keyframes up { to { opacity: 1; transform: translateY(0); } }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.15s; }
+    .d3 { animation-delay: 0.28s; }
+    .d4 { animation-delay: 0.42s; }
+    .d5 { animation-delay: 0.12s; }
+    .d6 { animation-delay: 0.24s; }
+    .d7 { animation-delay: 0.36s; }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 680px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .screenshots-inner { gap: 14px; }
+      .shot { width: 160px; border-radius: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .shot { width: 130px; border-radius: 16px; }
+      .cta-row { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 280px; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <img class="hero-icon fade d1" src="icon.png" alt="Folio app icon" width="120" height="120">
+    <span class="eyebrow fade d1">Folio for iPhone &amp; iPad</span>
+    <h1 class="fade d2">The PDF app that<br><em>works</em>.</h1>
+    <p class="tagline fade d3">Sign, fill, annotate, merge and scan PDFs — entirely on your device. No subscription. No cloud. No nonsense.</p>
+    <div class="cta-row fade d4">
+      <a href="#" class="btn btn-primary">
+        <svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        Download on the App Store
+      </a>
+      <a href="privacy.html" class="btn btn-ghost">Privacy Policy</a>
+    </div>
+    <p class="price-note fade d4"><strong>$9.99 once.</strong> No monthly fee. No subscription. Ever.</p>
+  </section>
+
+  <section class="screenshots">
+    <div class="screenshots-inner">
+      <div class="shot fade d5">
+        <img src="screenshot-1.png" alt="Folio documents library" loading="lazy">
+      </div>
+      <div class="shot fade d6">
+        <img src="screenshot-2.png" alt="Folio PDF viewer with annotation toolbar" loading="lazy">
+      </div>
+      <div class="shot fade d7">
+        <img src="screenshot-3.png" alt="Folio — $9.99 one-time, no subscription" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <p class="section-label">What's inside</p>
+    <h2>Everything you need<br>to handle any PDF.</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="feature-icon">✍️</span>
+        <h3>Sign &amp; Fill Forms</h3>
+        <p>Draw your signature once, save it, reuse it on any document. Fill PDF forms natively.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🔍</span>
+        <h3>Highlight &amp; Annotate</h3>
+        <p>Highlight, underline, strikethrough, draw freehand, add sticky notes and text boxes.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🔀</span>
+        <h3>Merge &amp; Reorder</h3>
+        <p>Combine multiple PDFs into one. Pick specific page ranges. Drag to reorder before merging.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🛡️</span>
+        <h3>Auto-Backup</h3>
+        <p>Every destructive operation creates a local snapshot first. Restore any earlier version in one tap.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📷</span>
+        <h3>Document Scanner</h3>
+        <p>Scan paper documents directly into a PDF using your camera. No third-party service needed.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🔒</span>
+        <h3>100% On-Device</h3>
+        <p>No account. No internet required. Your documents never leave your iPhone or iPad.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-section">
+    <div class="quote-line"></div>
+    <blockquote>&ldquo;Why is it so difficult to just sign a PDF without getting scammed into a subscription?&rdquo;</blockquote>
+    <p class="attr">— r/ipad, 208 upvotes. Folio is the answer.</p>
+  </section>
+
+  <section class="bottom-cta">
+    <h2>No tricks. No traps.<br>Just a PDF app.</h2>
+    <p>Pay once. Use it forever.</p>
+    <a href="#" class="btn btn-primary" style="margin: 0 auto; display: inline-flex;">
+      <svg viewBox="0 0 384 512" width="16" height="16"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      Download on the App Store
+    </a>
+  </section>
+
+  <footer>
+    <p>
+      Built by <a href="https://github.com/teambanhmi">Team Banh Mi</a><br>
+      <a href="privacy.html">Privacy Policy</a> &middot; <a href="mailto:admin@quietmuse.org">Support</a>
+    </p>
+  </footer>
+
+</body>
+</html>
