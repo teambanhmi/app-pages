@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Fed Retirement</title>
+  <meta name="description" content="Fed Retirement privacy policy. No data collection. No analytics. No network calls. 100% on-device.">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <style>
+    :root {
+      --navy: #1B2F4E;
+      --gold: #D4A24C;
+      --ivory: #F8F4EC;
+      --text: #1B2F4E;
+      --text-soft: rgba(27, 47, 78, 0.72);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+      background: var(--ivory);
+      color: var(--text);
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 24px 96px;
+      line-height: 1.7;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--navy); text-decoration-color: rgba(27,47,78,0.35); text-underline-offset: 3px; }
+    a:hover { color: var(--gold); }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 48px;
+      text-decoration: none;
+      color: var(--navy);
+    }
+    .brand img { width: 40px; height: 40px; border-radius: 10px; }
+    .brand span { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.01em; }
+    h1 {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+      font-size: 2.2rem;
+      margin: 0 0 4px;
+      letter-spacing: -0.02em;
+    }
+    .effective {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      margin: 0 0 36px;
+    }
+    h2 {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+      font-size: 1.25rem;
+      margin: 40px 0 10px;
+      letter-spacing: -0.01em;
+    }
+    p, li { color: var(--text); }
+    p.soft, li.soft, .soft { color: var(--text-soft); }
+    .callout {
+      background: #FFFFFF;
+      border: 1px solid rgba(27, 47, 78, 0.12);
+      border-left: 4px solid var(--gold);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 28px 0 32px;
+    }
+    .callout strong { color: var(--navy); }
+    ul { padding-left: 22px; }
+    ul li { margin-bottom: 6px; }
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(27, 47, 78, 0.15);
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    footer a { color: var(--navy); }
+  </style>
+</head>
+<body>
+
+<a href="index.html" class="brand" aria-label="Fed Retirement home">
+  <img src="assets/icon.png" alt="">
+  <span>Fed Retirement</span>
+</a>
+
+<h1>Privacy Policy</h1>
+<p class="effective">Effective April 17, 2026</p>
+
+<div class="callout">
+  <strong>Short version:</strong> Fed Retirement does not collect, store, share, or transmit any of your personal information. All calculations happen on your device. The app never makes a network request during normal use.
+</div>
+
+<h2>Data we collect</h2>
+<p><strong>None.</strong> Fed Retirement does not collect any personal information. We do not ask you to create an account, sign in, or link any external service.</p>
+
+<h2>Data you enter</h2>
+<p>The retirement scenarios you enter — date of birth, Service Computation Date, salary, TSP balance, SSA estimates, survivor elections, and any other inputs — are stored locally on your device using Apple's SwiftData framework. This data:</p>
+<ul>
+  <li>Never leaves your device</li>
+  <li>Is not synced to iCloud or any other cloud service in v1.0</li>
+  <li>Is not shared with Team Banhmi, Apple, or any third party</li>
+  <li>Is deleted permanently when you uninstall the app or tap "Reset All Data" in Settings</li>
+</ul>
+
+<h2>Network activity</h2>
+<p>Fed Retirement does not make network requests during calculation, browsing, or any core feature. The only network activity the app may produce is the standard iOS App Store receipt check at launch (handled entirely by Apple, not by us).</p>
+
+<h2>Analytics</h2>
+<p><strong>None.</strong> We do not integrate any analytics SDK. We do not run Firebase, Mixpanel, Amplitude, or any equivalent. We do not track events, sessions, crashes (beyond Apple's opt-in crash reports, which are anonymized by Apple and never sent to us), or usage patterns.</p>
+
+<h2>Advertising</h2>
+<p><strong>None.</strong> Fed Retirement does not display advertisements. It does not include any ad SDK. It does not share data with ad networks. It does not use the Advertising Identifier (IDFA).</p>
+
+<h2>Third-party services</h2>
+<p>Fed Retirement does not integrate any third-party SDK or service beyond Apple's standard system frameworks (SwiftUI, SwiftData, Charts, StoreKit for App Store purchases handled by Apple).</p>
+
+<h2>Data retention and deletion</h2>
+<p>Your scenarios persist on your device until you explicitly delete them or uninstall the app. The "Reset All Data" button in Settings clears all scenario data. Uninstalling Fed Retirement removes the local store entirely — there is no server-side copy to request removal of.</p>
+
+<h2>Future cloud sync (v1.1+)</h2>
+<p>We plan to add optional iCloud sync in a future version so users can share scenarios across their own Apple devices. If and when this ships, we will update this policy and the sync will be strictly opt-in. It will use Apple's CloudKit (your data, your iCloud, end-to-end encrypted by Apple) — we still will not have access to your data.</p>
+
+<h2>Children's privacy</h2>
+<p>Fed Retirement is designed for adult federal employees planning their retirement. It is not directed at children under 13 and does not knowingly collect information from them (nor anyone else).</p>
+
+<h2>Changes to this policy</h2>
+<p>If we change this policy, we will update the Effective Date at the top and post the revised policy at this URL. Because the app does not phone home, you will not be notified in-app — please check this page occasionally if you care about the details.</p>
+
+<h2>Contact</h2>
+<p>Questions, concerns, or data requests: <a href="mailto:admin@quietmuse.org">admin@quietmuse.org</a>. Because we do not collect your data, the most common request — deletion — is accomplished by uninstalling the app.</p>
+
+<footer>
+  <a href="index.html">← Back to Fed Retirement</a>
+</footer>
+
+</body>
+</html>

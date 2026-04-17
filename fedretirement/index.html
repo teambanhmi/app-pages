@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fed Retirement — FERS, CSRS, FERS-Special retirement planner</title>
+  <meta name="description" content="Accurate retirement planning for federal employees. FERS, CSRS, FERS-Special. Disability, VERA, MRA+10, Social Security Fairness Act, age-62 recomputation. Built for 2025. No ads, no subscription.">
+  <meta name="theme-color" content="#1B2F4E">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <style>
+    :root {
+      --navy: #1B2F4E;
+      --navy-light: #27416D;
+      --gold: #D4A24C;
+      --gold-dim: #B8893E;
+      --ivory: #F8F4EC;
+      --ivory-card: #FFFFFF;
+      --border: rgba(27, 47, 78, 0.12);
+      --text: #1B2F4E;
+      --text-soft: rgba(27, 47, 78, 0.7);
+      --text-mute: rgba(27, 47, 78, 0.5);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--ivory);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: var(--navy); text-decoration: underline; text-decoration-color: rgba(27,47,78,0.3); text-underline-offset: 3px; }
+    a:hover { color: var(--gold-dim); text-decoration-color: var(--gold); }
+
+    h1, h2, h3 {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+      color: var(--navy);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin: 0 0 0.6em;
+    }
+
+    h1 { font-size: 3.2rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.25rem; }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ----- Hero ----- */
+    .hero {
+      background: var(--navy);
+      color: var(--ivory);
+      padding: 72px 0 88px;
+      overflow: hidden;
+    }
+    .hero h1 { color: var(--ivory); }
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-copy .icon {
+      width: 108px; height: 108px;
+      border-radius: 24px;
+      margin-bottom: 28px;
+      box-shadow: 0 20px 40px -16px rgba(0,0,0,0.45);
+    }
+    .hero-copy .tagline {
+      color: var(--gold);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    .hero-copy .subhead {
+      color: rgba(248, 244, 236, 0.85);
+      font-size: 1.2rem;
+      line-height: 1.5;
+      margin: 20px 0 36px;
+      max-width: 520px;
+    }
+    .hero-image {
+      position: relative;
+    }
+    .hero-image img {
+      width: 100%;
+      max-width: 520px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 18px;
+      box-shadow: 0 32px 80px -20px rgba(0,0,0,0.55);
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+    .cta:hover { background: #E5B45F; text-decoration: none; color: var(--navy); }
+    .cta-note {
+      display: block;
+      color: rgba(248, 244, 236, 0.6);
+      font-size: 0.85rem;
+      margin-top: 12px;
+    }
+
+    /* ----- Sections ----- */
+    section { padding: 80px 0; }
+    section h2 { text-align: center; margin-bottom: 48px; }
+    section .lede {
+      text-align: center;
+      max-width: 640px;
+      margin: -32px auto 56px;
+      color: var(--text-soft);
+      font-size: 1.1rem;
+    }
+
+    /* ----- Features ----- */
+    .features {
+      background: var(--ivory-card);
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px 24px;
+    }
+    .feature-card {
+      background: var(--ivory);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+    .feature-card .badge {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+    }
+    .feature-card h3 { margin-bottom: 8px; }
+    .feature-card p { color: var(--text-soft); margin: 0; font-size: 0.97rem; }
+
+    /* ----- Accuracy ----- */
+    .accuracy {
+      background: var(--navy);
+      color: var(--ivory);
+    }
+    .accuracy h2, .accuracy .num { color: var(--ivory); }
+    .accuracy .lede { color: rgba(248, 244, 236, 0.75); }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+      margin: 48px 0 64px;
+      text-align: center;
+    }
+    .metric .num {
+      font-size: 3.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--gold);
+      font-variant-numeric: tabular-nums;
+    }
+    .metric .label {
+      color: rgba(248, 244, 236, 0.7);
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+    .sources {
+      background: rgba(248, 244, 236, 0.05);
+      border: 1px solid rgba(248, 244, 236, 0.15);
+      border-radius: 16px;
+      padding: 28px 32px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .sources h3 { color: var(--gold); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    .sources ul { margin: 0; padding: 0 0 0 18px; }
+    .sources li { color: rgba(248, 244, 236, 0.9); margin-bottom: 8px; }
+    .sources code { background: rgba(248, 244, 236, 0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+
+    /* ----- Comparison table ----- */
+    .compare { background: var(--ivory); }
+    .compare-wrap { overflow-x: auto; margin: 0 -12px; padding: 0 12px; }
+    table.compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--ivory-card);
+      border-radius: 14px;
+      overflow: hidden;
+      min-width: 720px;
+    }
+    .compare-table th, .compare-table td {
+      padding: 14px 18px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+    .compare-table th:first-child, .compare-table td:first-child {
+      text-align: left;
+      color: var(--text-soft);
+      font-weight: 500;
+    }
+    .compare-table thead th {
+      background: var(--navy);
+      color: var(--ivory);
+      font-weight: 700;
+      text-align: center;
+    }
+    .compare-table thead th.ours {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .compare-table td.yes { color: #2E7D32; font-weight: 700; }
+    .compare-table td.no { color: #B83C3C; }
+    .compare-table td.ours { background: rgba(212, 162, 76, 0.08); font-weight: 600; }
+    .compare-table tbody tr:last-child td { border-bottom: none; }
+
+    /* ----- FAQ ----- */
+    .faq { background: var(--ivory-card); }
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    details {
+      background: var(--ivory);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+    details[open] { box-shadow: 0 4px 12px -6px rgba(27,47,78,0.15); }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--navy);
+      list-style: none;
+      padding: 4px 0;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::after {
+      content: "+";
+      float: right;
+      color: var(--gold);
+      font-weight: 400;
+      font-size: 1.4rem;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+    details[open] summary::after { content: "−"; }
+    details p { color: var(--text-soft); margin: 12px 0 0; }
+
+    /* ----- Footer ----- */
+    footer {
+      background: var(--navy);
+      color: rgba(248, 244, 236, 0.7);
+      padding: 48px 0;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    footer a { color: var(--gold); }
+    footer .links { margin-bottom: 16px; }
+    footer .links a { margin: 0 14px; }
+    footer .copyright { font-size: 0.85rem; color: rgba(248, 244, 236, 0.4); }
+
+    /* ----- Responsive ----- */
+    @media (max-width: 860px) {
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.6rem; }
+      .hero { padding: 56px 0 64px; }
+      .hero .container { grid-template-columns: 1fr; gap: 40px; }
+      .hero-image img { max-width: 320px; }
+      section { padding: 56px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-copy">
+      <img src="assets/icon.png" alt="Fed Retirement app icon" class="icon">
+      <p class="tagline">FERS · CSRS · FERS-Special</p>
+      <h1>Federal retirement, calculated correctly.</h1>
+      <p class="subhead">
+        Built for 2025. The only FERS/CSRS planner that models the Social Security
+        Fairness Act, disability retirement phases, VERA supplement timing, and
+        the age-62 1.1% recomputation — with every formula cited to the US Code.
+      </p>
+      <a href="#" class="cta" aria-label="Download on the App Store">Download on the App Store</a>
+      <span class="cta-note">Coming soon — pending Apple review.</span>
+    </div>
+    <div class="hero-image">
+      <img src="assets/hero-ipad.png" alt="Fed Retirement dashboard on iPad showing annuity, supplement, TSP, Social Security, and the age-62 transition" loading="lazy">
+    </div>
+  </div>
+</header>
+
+<section class="features">
+  <div class="container">
+    <h2>Designed for every federal retirement path</h2>
+    <p class="lede">Five differentiators no other FERS/CSRS planner combines — not the $4.99 incumbents, not the free calculators, not the spreadsheets.</p>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <span class="badge">2025</span>
+        <h3>Built for 2025</h3>
+        <p>Models the Social Security Fairness Act (P.L. 118-273, WEP/GPO repeal), current FERS COLA bands, and the 2026 earnings-test limit. Most apps on the store were last updated in 2021.</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="badge">Coverage</span>
+        <h3>Every retirement path</h3>
+        <p>FERS disability (Phase 1 / Phase 2 / age-62 recomp), VERA with supplement deferred to MRA, MRA+10 reduced annuity with full-month math, sick-leave credit. Ships with the edge cases most planners skip.</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="badge">Special</span>
+        <h3>FERS-Special, done right</h3>
+        <p>Law Enforcement, Firefighters, and Air Traffic Controllers retire at 50 with 20 years — and get COLA from retirement, not age 62. The 1.7% / 1.0% tiered formula is modeled correctly, including the age-62 recomputation with imputed disability years.</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="badge">Depth</span>
+        <h3>The complete picture</h3>
+        <p>Year-by-year projections through age 95: FERS/CSRS annuity, FERS Supplement, Social Security with delayed credits, TSP with the correct FERS tiered match (1% auto + 1:1 on 3% + 0.5:1 on 2%), survivor benefit costs, and other income.</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="badge">Trust</span>
+        <h3>No ads. No subscription. No IAP.</h3>
+        <p>One price. Everything unlocked. Your data stays on your device — no account, no cloud, no analytics. Every formula is cited to the US Code. Open refusal to bait-and-switch.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="accuracy">
+  <div class="container">
+    <h2>We don't guess. We cite.</h2>
+    <p class="lede">Federal retirement is governed by statute. We model the statute — not training data, not guesses, not "close enough."</p>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="num">21</div>
+        <div class="label">Integration tests</div>
+      </div>
+      <div class="metric">
+        <div class="num">5</div>
+        <div class="label">US Code sources</div>
+      </div>
+      <div class="metric">
+        <div class="num">0</div>
+        <div class="label">Analytics calls</div>
+      </div>
+      <div class="metric">
+        <div class="num">100%</div>
+        <div class="label">On-device</div>
+      </div>
+    </div>
+
+    <div class="sources">
+      <h3>Primary sources cited in the math</h3>
+      <ul>
+        <li><code>5 USC §8452</code> — FERS disability computation (Phase 1 / Phase 2 / age-62 redetermination)</li>
+        <li><code>5 USC §8415</code> — FERS basic annuity, including MRA+10 reduction at 5/12% per full month</li>
+        <li><code>5 USC §8339</code> — CSRS computation, tiered multiplier, 80% cap, and survivor-benefit cost formula</li>
+        <li><code>5 USC §8462</code> — FERS COLA bands (≤2% full CPI, 2–3% capped at 2% flat, &gt;3% CPI−1pt)</li>
+        <li><code>P.L. 118-273</code> — Social Security Fairness Act, repealing WEP and GPO retroactive to January 2024</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="compare">
+  <div class="container">
+    <h2>How we compare</h2>
+    <p class="lede">Other FERS/CSRS apps on the App Store. We checked.</p>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>FERS+CSRS Estimator</th>
+            <th>FERS Toolkit</th>
+            <th>FedCompass</th>
+            <th class="ours">Fed Retirement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Last meaningful update</td>
+            <td>2021</td>
+            <td>Abandoned</td>
+            <td>3 weeks old</td>
+            <td class="ours">2026</td>
+          </tr>
+          <tr>
+            <td>Social Security Fairness Act</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="ours yes">Yes</td>
+          </tr>
+          <tr>
+            <td>Disability retirement (Phase 1/2/62)</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="ours yes">Yes</td>
+          </tr>
+          <tr>
+            <td>VERA supplement deferred to MRA</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="ours yes">Yes</td>
+          </tr>
+          <tr>
+            <td>Sick-leave credit in computation</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="ours yes">Yes</td>
+          </tr>
+          <tr>
+            <td>MRA+10 full-month math</td>
+            <td class="no">Approximate</td>
+            <td class="no">No</td>
+            <td class="no">Approximate</td>
+            <td class="ours yes">Yes</td>
+          </tr>
+          <tr>
+            <td>FERS-Special COLA from retirement</td>
+            <td class="no">Wrong (gated at 62)</td>
+            <td class="no">No</td>
+            <td class="no">Wrong (gated at 62)</td>
+            <td class="ours yes">Yes</td>
+          </tr>
+          <tr>
+            <td>Age-62 1.1x recomputation</td>
+            <td class="yes">Yes</td>
+            <td class="no">No</td>
+            <td class="no">Partial</td>
+            <td class="ours yes">Yes</td>
+          </tr>
+          <tr>
+            <td>Price</td>
+            <td>$4.99</td>
+            <td>Free</td>
+            <td>$9.99/yr</td>
+            <td class="ours">One-time</td>
+          </tr>
+          <tr>
+            <td>Ads / analytics</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td class="ours yes">None</td>
+          </tr>
+          <tr>
+            <td>Subscription lock-in</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="no">Yes</td>
+            <td class="ours yes">No</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="container">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-list">
+
+      <details>
+        <summary>What is my MRA?</summary>
+        <p>Your Minimum Retirement Age is the earliest age you can retire under FERS with at least 30 years of service. It depends on your birth year: 55 for pre-1948 births, stepping up to 57 for 1970+ births. Fed Retirement looks it up automatically from your date of birth using the OPM table.</p>
+      </details>
+
+      <details>
+        <summary>Does this app work for FERS-Special (LEO, Firefighter, ATC)?</summary>
+        <p>Yes. FERS-Special employees in covered positions can retire at 50 with 20 years (or any age with 25 years). The app models the 1.7% tier for the first 20 covered years and 1.0% thereafter, plus COLA from retirement (not age 62) per <code>5 USC §8462(c)(2)(B)</code>, plus the age-62 recomputation that imputes disability-period service.</p>
+      </details>
+
+      <details>
+        <summary>What about WEP and GPO?</summary>
+        <p>Both the Windfall Elimination Provision and the Government Pension Offset were repealed by the Social Security Fairness Act (P.L. 118-273), signed January 2025 and retroactive to January 2024. If you have Social Security credits from non-federal employment (common for CSRS retirees with side work), you may now be eligible for unreduced benefits. Enter your SSA estimate — we don't apply a reduction.</p>
+      </details>
+
+      <details>
+        <summary>Can I import my FERS Statement data?</summary>
+        <p>Not in v1.0. All inputs are manual — Service Computation Date from your SF-50, SS estimates from ssa.gov, TSP balance from tsp.gov. This is deliberate: we don't want to hold a credential or scrape another site. v1.1 may add FERS Statement OCR if enough users request it.</p>
+      </details>
+
+      <details>
+        <summary>Is my data private?</summary>
+        <p>Yes. The app runs 100% on-device. There is no account. There is no cloud sync in v1.0. There is no analytics SDK. There is no network call at any point during calculation. Delete the app and your data is gone.</p>
+      </details>
+
+      <details>
+        <summary>Refund policy?</summary>
+        <p>Standard Apple App Store refund terms apply — you can request a refund via <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a> within 14 days of purchase in most regions.</p>
+      </details>
+
+      <details>
+        <summary>How do I contact support?</summary>
+        <p>Email <a href="mailto:admin@quietmuse.org">admin@quietmuse.org</a>. Expect a response within 48 hours on weekdays.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="mailto:admin@quietmuse.org">Support</a>
+      <a href="https://github.com/teambanhmi/fedretire">Source</a>
+    </div>
+    <p class="copyright">© 2026 Team Banhmi. Fed Retirement is a planning tool, not a substitute for verification with OPM, SSA, and your agency HR before making retirement decisions.</p>
+  </div>
+</footer>
+
+</body>
+</html>
